@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  express-app-deployment
+  labels:
+    app:  express-app
+spec:
+  selector:
+    matchLabels:
+      app: express-app
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app:  express-app
+    spec:
+      containers:
+      - name: express-app
+        image: phongdosw2/express-app-2
+        resources:
+          limits:
+            cpu: 100m
+            memory: 500Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        ports:
+        - containerPort:  3301
+      restartPolicy: Always
